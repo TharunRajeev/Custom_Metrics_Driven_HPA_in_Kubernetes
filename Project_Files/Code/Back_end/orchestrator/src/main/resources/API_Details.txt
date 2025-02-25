@@ -1,0 +1,95 @@
+API Call 1: Create a task
+Mapping: POST
+URL: http://localhost:8080/tasks
+Request JSON:
+{
+    "name": "Task",
+    "taskTime": 30000
+}
+Response JSON: 200 with this body
+{
+    "id": 6,
+    "name": "Task",
+    "status": "READY",
+    "taskTime": 30000,
+    "created_time": "2024-10-01T00:29:17"
+}
+
+
+API Call 2: Get the list of all tasks from the table
+Mapping: GET
+URL: http://localhost:8080/tasks
+Request JSON: N/A
+Response JSON: 200 with this body
+[
+    {
+        "id": 1,
+        "name": "Task",
+        "status": "COMPLETED",
+        "taskTime": 0,
+        "created_time": "2024-10-01T10:12:07"
+    },
+    {
+        "id": 2,
+        "name": "Task",
+        "status": "COMPLETED",
+        "taskTime": 0,
+        "created_time": "2024-10-01T10:17:03"
+    },
+    {
+        "id": 3,
+        "name": "Task 1",
+        "status": "COMPLETED",
+        "taskTime": 0,
+        "created_time": "2024-10-01T10:17:57"
+    },
+    {
+        "id": 4,
+        "name": "Task 3",
+        "status": "COMPLETED",
+        "taskTime": 0,
+        "created_time": "2024-10-01T10:18:39"
+    },
+    {
+        "id": 5,
+        "name": "Task 4",
+        "status": "COMPLETED",
+        "taskTime": 30000,
+        "created_time": "2024-10-01T10:20:26"
+    },
+    {
+        "id": 6,
+        "name": "Task 5",
+        "status": "COMPLETED",
+        "taskTime": 30000,
+        "created_time": "2024-10-01T10:22:10"
+    }
+]
+
+
+API Call 3: Delete a task
+Mapping: DELETE
+URL: http://localhost:8080/tasks/{id}
+Request JSON: N/A
+Response JSON: 200 with body
+"Task with ID " + id + " has been deleted."
+
+API Call 4: Reschedule a task
+Mapping: PUT
+URL: http://localhost:8080/tasks/reschedule-task/{id}
+Request JSON: N/A
+Response JSON: 200 with body
+{
+"id": 2,
+"name": "Task",
+"status": "READY",
+"taskTime": 30000,
+"created_time": "2024-10-01T00:17:11"
+}
+
+API Call 5: Get the Queue_Length Metric
+Mapping: GET
+URL: http://localhost:8080/tasks/queue-length
+Request JSON: N/A
+Response JSON: 200 with body
+0.0 //It will be a float number.

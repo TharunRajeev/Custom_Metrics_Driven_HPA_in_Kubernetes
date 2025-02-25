@@ -1,0 +1,11 @@
+SHOW DATABASES;
+
+USE `tdc-test`;
+
+SHOW TABLES;
+
+SELECT * from task;
+
+TRUNCATE TABLE task;
+
+DROP TABLE task;

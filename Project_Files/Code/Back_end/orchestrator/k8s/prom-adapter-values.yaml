@@ -1,0 +1,18 @@
+prometheus:
+  url: http://prometheus-server.default.svc # The URL where Prometheus is running within the Kubernetes cluster and 'default.svc' refers to the default namespace and service in the cluster.
+  port: 80 #port number from the prometheus-server service
+rules:
+  default: false # Specifies whether default rules should be used (set to 'false' to disable default rules).
+  custom:
+    - seriesQuery: 'queue_length{job="custom-metric"}' #job is scraping defined in prom-server-conf
+      resources:
+        overrides:
+          namespace:
+            resource: namespace # Maps the 'namespace' field from the query to the corresponding Kubernetes resource 'namespace'.
+          pod:
+            resource: pod # Maps the 'pod' field from the query to the corresponding Kubernetes resource 'pod'.
+      name:
+        matches: "^(.*)$" # A regular expression to capture the metric name.
+        as: "${1}" # The captured name is used as the metric name.
+      metricsQuery: 'queue_length{job="custom-metric",namespace!="",pod!=""}' # PromQL query to fetch the 'queue_length' metric
+                                                                              # while ensuring that job matches the prometheus scraping job and the 'namespace' and 'pod' fields are non-empty.
